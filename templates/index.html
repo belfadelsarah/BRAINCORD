@@ -1,45 +1,27 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>BRAINCORD – Création de sites web</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends 'base.html' %}
 
-<header class="navbar">
-    <div class="logo">BRANCORD</div>
-    <nav>
-        <a href="#">Accueil</a>
-        <a href="#">Services</a>
-        <a href="#">Réalisations</a>
-        <a href="#">Témoignages</a>
-        <a href="#">Contact</a>
-        <button class="cta">Obtenir un devis</button>
-    </nav>
-</header>
+{% block title %}BRAINCORD - Création de sites web{% endblock %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% block content %}
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Création de Sites Web<br/>Professionnels pour Entreprises</h1>
+            <p>
+                Boostez votre entreprise avec un site web sur mesure,
+                moderne et performant.
+            </p>
 
-<section class="hero">
-    <div class="hero-text">
-        <h1>Création de Sites Web<br>Professionnels pour Entreprises</h1>
-        <p>
-            Boostez votre entreprise avec un site web sur mesure,
-            moderne et performant.
-        </p>
+            <a href="{{ url_for('services') }}"><button class="primary-btn">Voir nos services</button></a>
 
-        <button class="primary-btn">Voir nos services</button>
+            <ul class="features">
+                <li>✔ Sites vitrines & e-commerce</li>
+                <li>✔ Design moderne & responsive</li>
+                <li>✔ Optimisation SEO & mobile</li>
+            </ul>
+        </div>
 
-        <ul class="features">
-            <li>✔ Sites vitrines & e-commerce</li>
-            <li>✔ Design moderne & responsive</li>
-            <li>✔ Optimisation SEO & mobile</li>
-        </ul>
-    </div>
-
-    <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f" alt="Web design">
-    </div>
-</section>
-
-</body>
-</html>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f" alt="Web design">
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% block title %}BRAINCORD - Nos Services{% endblock %}
+
+{% block content %}
+    <section class="services-section">
+        <h1>Nos Services</h1>
+        <p>Nous offrons une gamme complète de services pour répondre à vos besoins en matière de création de sites web.</p>
+        <div class="services-grid">
+            <div class="service">
+                <h2>Web Design</h2>
+                <p>Création de designs de sites web modernes et attrayants, adaptés à votre image de marque.</p>
+            </div>
+            <div class="service">
+                <h2>Développement Web</h2>
+                <p>Développement de sites web performants et optimisés pour le référencement.</p>
+            </div>
+            <div class="service">
+                <h2>Référencement SEO</h2>
+                <p>Optimisation de votre site web pour améliorer votre visibilité sur les moteurs de recherche.</p>
+            </div>
+            <div class="service">
+                <h2>Solutions E-commerce</h2>
+                <p>Création de boutiques en ligne complètes et faciles à utiliser.</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
