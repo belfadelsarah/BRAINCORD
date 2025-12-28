@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Merci{% endblock %}
+
+{% block content %}
+<section class="merci-section">
+    <h1>Merci pour votre message 🙏</h1>
+    <p>Nous vous répondrons rapidement.</p>
+
+    <a href="{{ url_for('home') }}" class="cta">Retour à l'accueil</a>
+</section>
+{% endblock %}

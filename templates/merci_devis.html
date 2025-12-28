@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Merci pour votre demande de devis{% endblock %}
+
+{% block content %}
+<section class="merci-section">
+    <h1>Merci pour votre demande de devis 🙏</h1>
+    <p>
+        Votre demande a bien été reçue.<br>
+        Nous vous contacterons sous <strong>24 heures</strong>.
+    </p>
+
+    <a href="{{ url_for('home') }}" class="cta">Retour à l'accueil</a>
+</section>
+{% endblock %}
