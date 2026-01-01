@@ -7,28 +7,23 @@ from dotenv import load_dotenv
 # =====================
 # INIT
 # =====================
-
-# Charge .env seulement en local (PAS sur Render)
-if os.getenv("RENDER") is None:
-    load_dotenv()
+load_dotenv()  # utile en local, ignoré par Render
 
 app = Flask(__name__)
 
 # =====================
 # CONFIG EMAIL
 # =====================
-
 EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
 EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
 
-if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
-    raise RuntimeError("EMAIL_ADDRESS ou EMAIL_PASSWORD manquant")
-
 # =====================
-# ENVOI EMAIL
+# FONCTION ENVOI EMAIL
 # =====================
-
 def send_email(subject, content):
+    if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
+        raise RuntimeError("Variables EMAIL_ADDRESS ou EMAIL_PASSWORD manquantes")
+
     msg = EmailMessage()
     msg["Subject"] = subject
     msg["From"] = EMAIL_ADDRESS
@@ -43,22 +38,26 @@ def send_email(subject, content):
 # ROUTES
 # =====================
 
+# -------- HOME --------
 @app.route("/")
 def home():
     return render_template("index.html")
 
+# -------- SERVICES --------
 @app.route("/services")
 def services():
     return render_template("services.html")
 
+# -------- CONTACT --------
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        name = request.form.get("name")
-        email = request.form.get("email")
-        message = request.form.get("message")
+        try:
+            name = request.form.get("name")
+            email = request.form.get("email")
+            message = request.form.get("message")
 
-        email_content = f"""
+            email_content = f"""
 📩 NOUVEAU MESSAGE - FORMULAIRE CONTACT
 
 Nom : {name}
@@ -68,21 +67,31 @@ Message :
 {message}
 """
 
-        send_email("📩 Nouveau message contact - BRAINCORD", email_content)
-        return redirect(url_for("merci"))
+            send_email(
+                "📩 Nouveau message contact - BRAINCORD",
+                email_content
+            )
+
+            return redirect(url_for("merci"))
+
+        except Exception as e:
+            print("ERREUR CONTACT :", e)
+            return "Erreur lors de l'envoi du message. Réessayez plus tard.", 500
 
     return render_template("contact.html")
 
+# -------- DEVIS --------
 @app.route("/request-quote", methods=["GET", "POST"])
 def request_quote():
     if request.method == "POST":
-        name = request.form.get("name")
-        email = request.form.get("email")
-        phone = request.form.get("phone")
-        project_description = request.form.get("project_description")
-        budget = request.form.get("budget")
+        try:
+            name = request.form.get("name")
+            email = request.form.get("email")
+            phone = request.form.get("phone")
+            project_description = request.form.get("project_description")
+            budget = request.form.get("budget")
 
-        email_content = f"""
+            email_content = f"""
 🧾 NOUVELLE DEMANDE DE DEVIS
 
 Nom : {name}
@@ -94,11 +103,20 @@ Description du projet :
 {project_description}
 """
 
-        send_email("🧾 Nouvelle demande de devis - BRAINCORD", email_content)
-        return redirect(url_for("merci_devis"))
+            send_email(
+                "🧾 Nouvelle demande de devis - BRAINCORD",
+                email_content
+            )
+
+            return redirect(url_for("merci_devis"))
+
+        except Exception as e:
+            print("ERREUR DEVIS :", e)
+            return "Erreur lors de l'envoi du devis. Réessayez plus tard.", 500
 
     return render_template("request_quote.html")
 
+# -------- PAGES MERCI --------
 @app.route("/merci")
 def merci():
     return render_template("merci.html")
@@ -106,3 +124,9 @@ def merci():
 @app.route("/merci-devis")
 def merci_devis():
     return render_template("merci_devis.html")
+
+# =====================
+# RUN LOCAL UNIQUEMENT
+# =====================
+if __name__ == "__main__":
+    app.run(debug=True)
