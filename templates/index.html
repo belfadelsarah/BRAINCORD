@@ -1,27 +1,27 @@
 {% extends 'base.html' %}
 
 {% block title %}BRAINCORD - Création de sites web{% endblock %}
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 {% block content %}
-    <section class="hero">
-        <div class="hero-text">
-            <h1>Création de Sites Web<br/>Professionnels pour Entreprises</h1>
-            <p>
-                Boostez votre entreprise avec un site web sur mesure,
-                moderne et performant.
-            </p>
+<section class="hero">
+    <div class="hero-text">
+        <h1>Création de Sites Web<br/>Professionnels pour Entreprises</h1>
+        <p>
+            Boostez votre entreprise avec un site web sur mesure,
+            moderne et performant.
+        </p>
 
-            <a href="{{ url_for('services') }}"><button class="primary-btn">Voir nos services</button></a>
+        <a href="{{ url_for('services') }}"><button class="primary-btn">Voir nos services</button></a>
 
-            <ul class="features">
-                <li>✔ Sites vitrines & e-commerce</li>
-                <li>✔ Design moderne & responsive</li>
-                <li>✔ Optimisation SEO & mobile</li>
-            </ul>
-        </div>
+        <ul class="features">
+            <li>✔ Sites vitrines & e-commerce</li>
+            <li>✔ Design moderne & responsive</li>
+            <li>✔ Optimisation SEO & mobile</li>
+        </ul>
+    </div>
 
-        <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f" alt="Web design">
-        </div>
-    </section>
+    <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f" alt="Web design">
+    </div>
+</section>
 {% endblock %}
