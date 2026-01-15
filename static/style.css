@@ -1,11 +1,16 @@
-/* style.css */
-
-body {
-    background: radial-gradient(circle at top left, #0f2027, #000);
-    color: #fff;
-    font-family: "Segoe UI", sans-serif; /* Ensure font is defined */
+/* RESET */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+/* GLOBAL */
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top left, #0f2027, #000);
+    color: #fff;
+    line-height: 1.6;
 }
 
 /* NAVBAR */
@@ -17,33 +22,33 @@ body {
 }
 
 .logo {
-    font-size: 42px;
+    font-size: 36px;
     font-weight: 800;
     color: #ff4f9a;
     letter-spacing: 2px;
 }
 
-nav a {
-    margin: 0 15px;
+.nav-links a {
+    margin-left: 20px;
     color: #ddd;
     text-decoration: none;
 }
 
 .cta {
     background: #3ccfcf;
-    border: none;
-    padding: 12px 20px;
+    padding: 10px 18px;
     border-radius: 8px;
-    cursor: pointer;
+    color: #000;
     font-weight: bold;
 }
 
 /* HERO */
 .hero {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     padding: 80px;
+    gap: 40px;
 }
 
 .hero-text {
@@ -56,168 +61,133 @@ nav a {
 }
 
 .hero-text p {
-    font-size: 18px;
-    margin-bottom: 30px;
     color: #ccc;
+    margin-bottom: 25px;
 }
 
 .primary-btn {
     background: #3ccfcf;
     border: none;
-    padding: 15px 30px;
-    font-size: 16px;
+    padding: 14px 28px;
     border-radius: 10px;
+    font-size: 16px;
     cursor: pointer;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+}
+
+.features {
+    list-style: none;
 }
 
 .features li {
-    list-style: none;
-    margin: 10px 0;
+    margin-bottom: 8px;
     color: #9ff;
 }
 
 .hero-image img {
     width: 450px;
     border-radius: 15px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
 }
 
-/* Services Section */
+/* SERVICES */
 .services-section {
-    padding: 40px 80px; /* Keep consistent padding */
-}
-
-.services-section h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-    text-align: center; /* Center the heading */
-}
-
-.services-section p {
-    font-size: 18px;
-    color: #ccc;
+    padding: 60px 80px;
     text-align: center;
-    margin-bottom: 30px;
 }
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 30px;
+    margin-top: 40px;
 }
 
 .service {
-    background: #192a32; /* Darker background */
+    background: #192a32;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Softer shadow */
-    transition: transform 0.3s ease; /* Smooth hover effect */
 }
 
-.service:hover {
-    transform: translateY(-5px); /* Slight lift on hover */
-}
-
-.service h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #3ccfcf; /* Accent color */
-}
-
-.service p {
-    font-size: 16px;
-    color: #ddd; /* Lighter text */
-    line-height: 1.6; /* Improved readability */
-}
-
-/* Style the "Contact" link as a button */
-.contact-button {
-    background: #3ccfcf; /* Same background color as the "Obtenir un devis" button */
-    border: none;           /* Remove default border */
-    padding: 12px 20px;      /* Same padding */
-    border-radius: 8px;      /* Same border radius */
-    cursor: pointer;         /* Change cursor on hover */
-    font-weight: bold;      /* Make text bold */
-    color: #fff;             /* Set text color to white */
-    text-decoration: none;   /* Remove underline */
-    display: inline-block;  /* Make it behave like a button */
-    margin: 0 15px;         /* Add some spacing */
-    transition: background-color 0.2s ease; /* Smooth transition for hover */
-}
-
-.contact-button:hover {
-    background-color: #36b5b5; /* A slightly darker shade of the background color */
-}
-
-/* contact-section */
+/* CONTACT */
 .contact-section {
     width: 80%;
-    margin: 50px auto;
-    padding: 30px;
-    background-color: #192a32;
+    margin: 60px auto;
+    padding: 40px;
+    background: #192a32;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.contact-section h1 {
-    font-size: 2.5em;
-    color: #3ccfcf;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.contact-section p {
-    font-size: 1.1em;
-    color: #ddd;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-/* contact-form */
 .contact-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
-    font-size: 1.1em;
-    color: #eee;
-    margin-bottom: 5px;
-}
-
 .form-group input,
 .form-group textarea {
     padding: 10px;
+    border-radius: 6px;
     border: none;
-    border-radius: 5px;
-    background-color: #22333a;
+    background: #22333a;
     color: #fff;
-    font-size: 1em;
 }
 
-.form-group textarea {
-    resize: vertical;
-}
-
-/* submit-button */
 .submit-button {
-    padding: 12px 20px;
+    background: #3ccfcf;
     border: none;
+    padding: 12px;
     border-radius: 8px;
-    background-color: #3ccfcf;
-    color: #fff;
-    font-size: 1.1em;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-.submit-button:hover {
-    background-color: #36b5b5;
+/* ======================
+   RESPONSIVE MOBILE
+   ====================== */
+@media (max-width: 768px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .navbar {
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .hero {
+        flex-direction: column;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .hero-text h1 {
+        font-size: 32px;
+    }
+
+    .hero-image img {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .services-section {
+        padding: 40px 20px;
+    }
+
+    .contact-section {
+        width: 100%;
+        margin: 30px 0;
+        padding: 20px;
+    }
 }
