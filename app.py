@@ -10,16 +10,18 @@ app = Flask(__name__)
 # =====================
 def send_email(subject, content):
     message = Mail(
-        from_email="contact@tonsite.com",   # ⚠️ doit être validé sur SendGrid
-        to_emails="tonemail@gmail.com",     # là où tu reçois
+        from_email="belfadelsarah5@gmail.com",  # ⚠️ vérifié sur SendGrid
+        to_emails="belfadelsarah5@gmail.com",   # où tu reçois les mails
         subject=subject,
         plain_text_content=content
     )
 
     try:
         sg = SendGridAPIClient(os.environ.get("SENDGRID_API_KEY"))
-        sg.send(message)
+        response = sg.send(message)
         print("✅ Email envoyé via SendGrid")
+        print("Status Code:", response.status_code)
+        print("Headers:", response.headers)
     except Exception as e:
         print("❌ Erreur SendGrid :", e)
 
@@ -51,7 +53,6 @@ Email : {email}
 Message :
 {message}
 """
-
         send_email("Nouveau message contact - BRAINCORD", email_content)
         return redirect(url_for("merci"))
 
@@ -77,7 +78,6 @@ Budget : {budget}
 Projet :
 {project_description}
 """
-
         send_email("Nouvelle demande de devis - BRAINCORD", email_content)
         return redirect(url_for("merci_devis"))
 
@@ -92,7 +92,7 @@ def merci_devis():
     return render_template("merci_devis.html")
 
 # =====================
-# TEST PROD (optionnel)
+# TEST EMAIL (optionnel)
 # =====================
 @app.route("/test-email")
 def test_email():
