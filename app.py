@@ -1,52 +1,27 @@
 from flask import Flask, render_template, request, redirect, url_for
-import smtplib
-from email.message import EmailMessage
 import os
-from dotenv import load_dotenv
-
-# =====================
-# INIT
-# =====================
-load_dotenv()
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 app = Flask(__name__)
 
 # =====================
-# CONFIG EMAIL
-# =====================
-EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
-EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
-
-# ⚠️ NE PAS CRASHER L'APP EN PROD
-EMAIL_ENABLED = True
-if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
-    EMAIL_ENABLED = False
-    print("⚠️ Email désactivé : variables manquantes")
-
-# =====================
-# ENVOI EMAIL (SAFE)
+# SENDGRID EMAIL
 # =====================
 def send_email(subject, content):
-    if not EMAIL_ENABLED:
-        print("📩 Email non envoyé (email désactivé)")
-        return
+    message = Mail(
+        from_email="contact@tonsite.com",   # ⚠️ doit être validé sur SendGrid
+        to_emails="tonemail@gmail.com",     # là où tu reçois
+        subject=subject,
+        plain_text_content=content
+    )
 
     try:
-        msg = EmailMessage()
-        msg["Subject"] = subject
-        msg["From"] = EMAIL_ADDRESS
-        msg["To"] = EMAIL_ADDRESS
-        msg.set_content(content)
-
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=10) as smtp:
-            smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-            smtp.send_message(msg)
-
-        print("✅ Email envoyé avec succès")
-
+        sg = SendGridAPIClient(os.environ.get("SENDGRID_API_KEY"))
+        sg.send(message)
+        print("✅ Email envoyé via SendGrid")
     except Exception as e:
-        # 🔥 ON LOG MAIS ON NE PLANTE PAS
-        print("❌ Erreur envoi email :", e)
+        print("❌ Erreur SendGrid :", e)
 
 # =====================
 # ROUTES
@@ -117,7 +92,15 @@ def merci_devis():
     return render_template("merci_devis.html")
 
 # =====================
-# RUN LOCAL
+# TEST PROD (optionnel)
+# =====================
+@app.route("/test-email")
+def test_email():
+    send_email("Test Render", "Email OK depuis Render")
+    return "EMAIL OK"
+
+# =====================
+# RUN
 # =====================
 if __name__ == "__main__":
     app.run(debug=True)
